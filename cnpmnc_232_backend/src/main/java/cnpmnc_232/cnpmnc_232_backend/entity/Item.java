@@ -9,18 +9,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class Order {
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
-    private LocalDate date;
-    private Float deposit;
-
+    private Integer id;
+    private String name;
+    private Integer sizePurchase;
+    private Float price;
 }
