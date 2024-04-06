@@ -2,6 +2,7 @@ package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.OrderDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Order;
+import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/api/orders")
 public class OrderController {
+    OrderRepository orderRepo;
+
     @GetMapping("/hello")
     public ResponseEntity<?> hello() {
         return new ResponseEntity<>("hello", HttpStatus.OK);
     }
     @PostMapping("/add")
     public ResponseEntity<?> addOrder(@RequestBody OrderDto dto) {
-//        Order newOrd = new Order(dt)
-        return new ResponseEntity<>("ok", HttpStatus.OK);
+        Order newOrd = new Order(dto.getOrderDate(), dto.getSupplier(), dto.getDeposit());
+        orderRepo.save(newOrd);
+        return new ResponseEntity<>("save " + newOrd.getId() + " success", HttpStatus.OK);
     }
 }

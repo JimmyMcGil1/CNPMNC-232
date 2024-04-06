@@ -7,6 +7,7 @@ import cnpmnc_232.cnpmnc_232_backend.repository.ItemRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Getter
 @Setter
@@ -25,9 +32,15 @@ public class ItemController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addItems(@RequestBody ItemDto dto) {
-        Item newItem = new Item(dto.getId(), dto.getName(), dto.getSizePurchase(),
-                dto.getPrice());
+        Item newItem = new Item(dto.getId(),dto.getItem_name(), dto.getSize());
         itemRepo.save(newItem);
-        return new ResponseEntity<>("save " + newItem.getName() + " success", HttpStatus.OK);
+        return new ResponseEntity<>("save success", HttpStatus.OK);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll() {
+        List<Item> rtLst = new ArrayList<>();
+        rtLst = StreamSupport.stream(itemRepo.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(rtLst, HttpStatus.OK);
     }
 }
