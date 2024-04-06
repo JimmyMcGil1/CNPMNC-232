@@ -1,4 +1,4 @@
-package cnpmnc_232.cnpmnc_232_backend.entity;
+package cnpmnc_232.cnpmnc_232_backend.dto.request;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,16 +11,17 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Order {
+@Entity
+public class OrderDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
-    private LocalDate date;
+    private Integer id;
+    private LocalDate orderDate;
+    private Integer supplier;
     private Float deposit;
-
+    private Integer statusOrder;
 }

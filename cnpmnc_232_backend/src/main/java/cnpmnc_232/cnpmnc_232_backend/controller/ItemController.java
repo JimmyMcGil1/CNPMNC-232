@@ -1,10 +1,11 @@
 package cnpmnc_232.cnpmnc_232_backend.controller;
 
+import cnpmnc_232.cnpmnc_232_backend.dto.request.ItemDto;
 import cnpmnc_232.cnpmnc_232_backend.dto.request.OrderDto;
-import cnpmnc_232.cnpmnc_232_backend.entity.Order;
+import cnpmnc_232.cnpmnc_232_backend.entity.Item;
+import cnpmnc_232.cnpmnc_232_backend.repository.ItemRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Setter
 @AllArgsConstructor
 @Controller
-@RequestMapping("/api/orders")
-public class OrderController {
-    @GetMapping("/hello")
-    public ResponseEntity<?> hello() {
-        return new ResponseEntity<>("hello", HttpStatus.OK);
-    }
+@RequestMapping("/api/items")
+public class ItemController {
+    private ItemRepository itemRepo;
+
     @PostMapping("/add")
-    public ResponseEntity<?> addOrder(@RequestBody OrderDto dto) {
-//        Order newOrd = new Order(dt)
-        return new ResponseEntity<>("ok", HttpStatus.OK);
+    public ResponseEntity<?> addItems(@RequestBody ItemDto dto) {
+        Item newItem = new Item(dto.getId(), dto.getName(), dto.getSizePurchase(),
+                dto.getPrice());
+        itemRepo.save(newItem);
+        return new ResponseEntity<>("save " + newItem.getName() + " success", HttpStatus.OK);
     }
 }
