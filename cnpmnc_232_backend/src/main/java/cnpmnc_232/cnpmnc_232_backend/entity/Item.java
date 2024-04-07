@@ -1,9 +1,6 @@
 package cnpmnc_232.cnpmnc_232_backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +10,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity()
+@Table(name = "ITEM")
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
-    private String name;
-    private Integer sizePurchase;
-    private Float price;
+    @Column(name = "ITEM_NAME")
+    private String item_name;
+    @Column(name = "Size")
+    private Integer size;
 }

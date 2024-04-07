@@ -15,13 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
 public class OrderDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     private LocalDate orderDate;
-    private Integer supplier;
+    private Integer supplierId;
     private Float deposit;
-    private Integer statusOrder;
 }

@@ -14,9 +14,7 @@ public class ItemDto {
     @NotEmpty
     private Integer id;
     @NotEmpty
-    private String name;
+    private String item_name;
     @NotEmpty
-    private Integer sizePurchase;
-    @NotEmpty
-    private Float price;
+    private Integer size;
 }
