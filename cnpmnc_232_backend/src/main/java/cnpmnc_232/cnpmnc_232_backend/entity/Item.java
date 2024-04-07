@@ -10,11 +10,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "ITEM")
+@Entity()
+@Table(name = "ITEM")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
+    @Column(name = "ITEM_NAME")
     private String item_name;
+    @Column(name = "Size")
     private Integer size;
 }

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class OrderDto {
-    private String orderDate;
-    private Long supplier;
+    private LocalDate orderDate;
+    private Integer supplierId;
     private Float deposit;
 }
