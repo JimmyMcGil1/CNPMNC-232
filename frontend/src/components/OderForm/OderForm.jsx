@@ -83,7 +83,7 @@ const OrderForm = () => {
         <Form.Item label='Price' name='price' className='ml-2'
           rules={[{ required: true, message: 'Please input Price!' }]}
         >
-          <InputNumber min={0} defaultValue={price} onChange={onChangePrice} />
+          <InputNumber min={0} defaultValue={0} value={price} onChange={onChangePrice} />
         </Form.Item>
         <Form.Item label='Amount' name='amount' className='ml-2'
           rules={[{ required: true, message: 'Please input Amount!' }]}
@@ -92,7 +92,7 @@ const OrderForm = () => {
         </Form.Item>
         <Form.Item className='ml-2'>
           <Button type='primary' htmlType='submit'>
-            {editingIndex === -1 ? 'Add Item' : 'Save'}
+            Add Item
           </Button>
         </Form.Item>
       </Form>
@@ -136,13 +136,13 @@ const OrderForm = () => {
           name='basic'
         >
           <Form.Item label='Item' name='item'>
-            <Input value={item} onChange={(e) => onChangeItem(e.target.value)} />
+            <Input value={item} defaultValue={item} onChange={(e) => onChangeItem(e.target.value)} />
           </Form.Item>
           <Form.Item label='Price' name='price'>
             <InputNumber min={0} defaultValue={price} onChange={onChangePrice} />
           </Form.Item>
           <Form.Item label='Amount' name='amount'>
-            <InputNumber min={0} defaultValue={0} value={amount} onChange={onChangeAmount} />
+            <InputNumber min={0} defaultValue={amount} onChange={onChangeAmount} />
           </Form.Item>
         </Form>
       </Modal>
