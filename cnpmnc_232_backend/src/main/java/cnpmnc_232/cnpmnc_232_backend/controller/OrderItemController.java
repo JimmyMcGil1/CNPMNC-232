@@ -16,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RequestMapping("/api/order-item/")
-@Controller
+@RestController
 public class OrderItemController {
     OrderItemRepository odsItemssRepo;
 

@@ -19,7 +19,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @AllArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/api/orders")
 public class OrderController {
     OrderRepository orderRepo;
