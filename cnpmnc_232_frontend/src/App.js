@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Table_list_item from './page/Table_list_item';
 function App() {
