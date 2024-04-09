@@ -1,21 +1,17 @@
 package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.ItemDto;
-import cnpmnc_232.cnpmnc_232_backend.dto.request.OrderDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Item;
-import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.repository.ItemRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

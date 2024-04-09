@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/order-item/")
 @RestController
 public class OrderItemController {

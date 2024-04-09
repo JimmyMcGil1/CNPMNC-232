@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="024169d1-d8cf-4048-8cfc-8110b20189c3" name="Changes" comment="" />
+    <list default="true" id="024169d1-d8cf-4048-8cfc-8110b20189c3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Layout/Footer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Layout/Header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Layout/Layout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Static.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/error-page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/layout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/output.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/BillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/BillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/ItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/OrderItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/controller/OrderItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/dto/request/OrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/dto/request/OrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/dto/response/OrderRespDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cnpmnc_232/cnpmnc_232_backend/dto/response/OrderRespDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header/Header.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +41,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -41,29 +69,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.Cnpmnc232BackendApplication.executor": "Run",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Cnpmnc232BackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="cnpmnc_232.cnpmnc_232_backend.controller" />
@@ -95,6 +124,8 @@
       <option name="presentableId" value="Default" />
       <updated>1712369732851</updated>
       <workItem from="1712369734225" duration="60000" />
+      <workItem from="1712657656070" duration="96000" />
+      <workItem from="1712673007221" duration="2249000" />
     </task>
     <servers />
   </component>
