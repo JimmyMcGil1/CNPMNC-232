@@ -13,25 +13,27 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity()
 @Table(name = "SUPPLIER")
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(name = "SUPPLIER_NAME")
     private String name;
-
     @Column(name = "ADDRESS")
     private String address;
-
     @Column(name = "PHONE")
     private String phone;
-
     @Column(name = "EMAIL")
     private String email;
-
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Order> ordersId;
+
+    public Supplier(String name, String address, String phone, String email) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
 }
