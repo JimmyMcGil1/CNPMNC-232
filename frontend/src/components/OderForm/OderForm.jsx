@@ -97,7 +97,7 @@ const OrderForm = () => {
         </Form.Item>
       </Form>
       <Table dataSource={items}>
-        <Column title="STT" dataIndex='index' key='index' render={(text, record, index) => index + 1}/>
+        <Column title="ITEM ID" dataIndex='idItem' key='idItem' render={(text, record, index) => index + 1}/>
         <Column title="Item" dataIndex='item' key='item'/>
         <Column title="Price" dataIndex='price' key='price'/>
         <Column title="Amount" dataIndex='amount' key='amount'/>

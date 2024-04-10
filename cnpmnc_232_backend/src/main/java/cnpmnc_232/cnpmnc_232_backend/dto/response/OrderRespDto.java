@@ -14,6 +14,6 @@ public class OrderRespDto {
     LocalDate orderDate;
     Boolean statusOrder;
     Float deposit;
-    Integer supplierId;
+    String supplierName;
     Float totalCost;
 }
