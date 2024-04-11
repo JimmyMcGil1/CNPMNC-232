@@ -4,7 +4,6 @@ import cnpmnc_232.cnpmnc_232_backend.dto.request.SupplierDto;
 import cnpmnc_232.cnpmnc_232_backend.dto.response.SupplierRespDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.entity.Supplier;
-import cnpmnc_232.cnpmnc_232_backend.repository.ItemRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.SupplierRepository;
 import lombok.AllArgsConstructor;
@@ -21,12 +20,11 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @AllArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/api/suppliers")
 public class SupplierController {
-    OrderRepository orderRepo;
-    ItemRepository itemRepo;
-    SupplierRepository supplierRepo;
+    private OrderRepository orderRepo;
+    private SupplierRepository supplierRepo;
 
 
     @PostMapping("/add")
@@ -53,4 +51,6 @@ public class SupplierController {
             return new ResponseEntity<>("Fail to get all supplier:" + e.getMessage(), HttpStatus.OK);
         }
     }
+
+
 }
