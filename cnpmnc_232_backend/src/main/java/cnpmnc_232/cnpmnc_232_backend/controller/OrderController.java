@@ -2,6 +2,7 @@ package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.OrderDto;
 import cnpmnc_232.cnpmnc_232_backend.dto.response.OrderRespDto;
+import cnpmnc_232.cnpmnc_232_backend.dto.response.StatusRespDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.entity.Supplier;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +41,10 @@ public class OrderController {
 
             return new ResponseEntity<>(ordersDto, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Fail to get orders:" + e.getMessage(), HttpStatus.OK);
+            Dictionary<String, String> data = new Hashtable<>();
+            data.put("message", "fail");
+            data.put("error", e.getMessage());
+            return new ResponseEntity<>(data, HttpStatus.CONFLICT);
         }
     }
 
@@ -46,9 +52,19 @@ public class OrderController {
     public ResponseEntity<?> addOrder(@RequestBody OrderDto dto) {
         Optional<Supplier> supplier = suppRepo.findById(dto.getSupplier());
         if (supplier.isPresent()) {
-            Order newOrd = new Order(dto.getOrderDate(), supplier.get(), dto.getDeposit());
-            orderRepo.save(newOrd);
-            return new ResponseEntity<>("save " + newOrd.getId() + " success", HttpStatus.OK);
+            try {
+                Order newOrd = new Order(dto.getOrderDate(), supplier.get(), dto.getDeposit());
+                orderRepo.save(newOrd);
+                Dictionary<String, String> data = new Hashtable<>();
+                data.put("message", "success");
+                data.put("id", newOrd.getId().toString());
+                return new ResponseEntity<>(data, HttpStatus.OK);
+            } catch (Exception e) {
+                Dictionary<String, String> data = new Hashtable<>();
+                data.put("message", "fail");
+                data.put("error", e.getMessage());
+                return new ResponseEntity<>(data, HttpStatus.CONFLICT);
+            }
         } else {
             return new ResponseEntity<>("save fail, no supplier found", HttpStatus.OK);
         }
@@ -58,9 +74,11 @@ public class OrderController {
     public ResponseEntity<?> deleteOrder(@RequestParam String orderId) {
         try {
             orderRepo.deleteOrderById(Integer.parseInt(orderId));
-            return new ResponseEntity<>("Delete order " + orderId + " success", HttpStatus.OK);
+            StatusRespDto dto = new StatusRespDto("success", "");
+            return new ResponseEntity<>(dto, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Fail to delete order " + orderId + ":" + e.getMessage(), HttpStatus.CONFLICT);
+            StatusRespDto dto = new StatusRespDto("fail", e.getMessage());
+            return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
         }
     }
 

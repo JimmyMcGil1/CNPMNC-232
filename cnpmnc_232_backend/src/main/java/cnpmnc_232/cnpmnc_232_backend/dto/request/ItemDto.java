@@ -12,8 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ItemDto {
     @NotEmpty
-    private Integer id;
-    @NotEmpty
     private String item_name;
     @NotEmpty
     private Integer size;

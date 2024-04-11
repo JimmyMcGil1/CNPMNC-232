@@ -2,6 +2,8 @@ package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.DeleteOrderItem;
 import cnpmnc_232.cnpmnc_232_backend.dto.request.OrderItemDto;
+import cnpmnc_232.cnpmnc_232_backend.dto.response.StatusRespDto;
+import cnpmnc_232.cnpmnc_232_backend.dto.response.UpdateObjectRespDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.OrderItem.OrderItem;
 import cnpmnc_232.cnpmnc_232_backend.entity.OrderItem.OrderItemId;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderItemRepository;
@@ -12,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,22 +32,28 @@ public class OrderItemController {
                 dto.getSalePrice(), dto.getAmount());
         try {
             this.odsItemssRepo.save(newOrIt);
-            return new ResponseEntity<>("save new item for order success", HttpStatus.CREATED);
+            Dictionary<String,Integer> resDto = new Hashtable<>();
+            resDto.put("orderId", newOrIt.getIdOrder());
+            resDto.put("itemId", newOrIt.getIdItem());
+            return new ResponseEntity<>(resDto, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>("Fail to save item for order:" + e.getMessage(), HttpStatus.CONFLICT);
+            StatusRespDto respDto = new StatusRespDto("fail", e.getMessage());
+            return new ResponseEntity<>(respDto, HttpStatus.CONFLICT);
         }
     }
+
     @PostMapping("/delete")
     public ResponseEntity<?> deleteItem(@RequestBody DeleteOrderItem dto) {
-       try {
-        this.odsItemssRepo.removeItem(dto.getItemId(), dto.getOrderId());
-        return new ResponseEntity<>("remove item " + dto.getItemId() + " from order " + dto.getOrderId() + " success",
-                HttpStatus.OK);
-       }
-       catch (Exception e) {
-           return new ResponseEntity<>("fail to remove: " + e.getMessage(), HttpStatus.CONFLICT);
-       }
+        try {
+            UpdateObjectRespDto respDto = new UpdateObjectRespDto("success", dto.getItemId(), "");
+            this.odsItemssRepo.removeItem(dto.getItemId(), dto.getOrderId());
+            return new ResponseEntity<>(respDto, HttpStatus.OK);
+        } catch (Exception e) {
+            StatusRespDto respDto = new StatusRespDto("fail", e.getMessage());
+            return new ResponseEntity<>(respDto, HttpStatus.CONFLICT);
+        }
     }
+
     @GetMapping("/all/items/{id}")
     public ResponseEntity<?> getAllItems(@PathVariable Integer id) {
         try {

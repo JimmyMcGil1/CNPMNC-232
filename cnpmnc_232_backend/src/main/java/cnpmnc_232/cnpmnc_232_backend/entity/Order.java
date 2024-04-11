@@ -43,6 +43,7 @@ public class Order {
         this.orderDate = localDate;
         this.supplier = supplier;
         this.deposit = deposit;
-        this.statusOrder = true;
+        this.statusOrder = false;
+        this.totalCost = 0f;
     }
 }

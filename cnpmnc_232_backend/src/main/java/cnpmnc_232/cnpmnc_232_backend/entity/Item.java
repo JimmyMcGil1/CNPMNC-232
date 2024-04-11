@@ -21,4 +21,8 @@ public class Item {
     private String item_name;
     @Column(name = "Size")
     private Integer size;
+    public Item(String name, Integer size) {
+        this.item_name = name;
+        this.size = size;
+    }
 }

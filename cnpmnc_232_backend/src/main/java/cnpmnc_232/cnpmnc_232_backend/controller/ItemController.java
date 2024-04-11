@@ -1,6 +1,8 @@
 package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.ItemDto;
+import cnpmnc_232.cnpmnc_232_backend.dto.response.StatusRespDto;
+import cnpmnc_232.cnpmnc_232_backend.dto.response.UpdateObjectRespDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Item;
 import cnpmnc_232.cnpmnc_232_backend.repository.ItemRepository;
 import lombok.AllArgsConstructor;
@@ -27,9 +29,15 @@ public class ItemController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addItems(@RequestBody ItemDto dto) {
-        Item newItem = new Item(dto.getId(), dto.getItem_name(), dto.getSize());
-        itemRepo.save(newItem);
-        return new ResponseEntity<>("save success", HttpStatus.OK);
+        try {
+            Item newItem = new Item(dto.getItem_name(), dto.getSize());
+            Item savedIt = itemRepo.save(newItem);
+            UpdateObjectRespDto resp_dto = new UpdateObjectRespDto("success", savedIt.getId(), "");
+            return new ResponseEntity<>(resp_dto, HttpStatus.OK);
+        } catch (Exception e) {
+            StatusRespDto respDto = new StatusRespDto("fail", e.getMessage());
+            return new ResponseEntity<>(respDto, HttpStatus.CONFLICT);
+        }
     }
 
     @GetMapping("/all")
