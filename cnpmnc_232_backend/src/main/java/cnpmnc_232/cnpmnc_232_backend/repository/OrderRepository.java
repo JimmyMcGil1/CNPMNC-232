@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 @Transactional
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Modifying
-    @Query(value = "CALL DeleteOrder(:id)", nativeQuery = true )
+    @Query(value = "delete from ORDER_ where id = :id", nativeQuery = true )
     public void deleteOrderById(Integer id);
     @Modifying
     @Query(value = "CALL calculate_total_cost(:id)", nativeQuery = true)
