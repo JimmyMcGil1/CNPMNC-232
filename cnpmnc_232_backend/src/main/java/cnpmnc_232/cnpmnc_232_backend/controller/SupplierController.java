@@ -1,33 +1,30 @@
 package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.SupplierDto;
+import cnpmnc_232.cnpmnc_232_backend.dto.response.SupplierRespDto;
+import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.entity.Supplier;
-import cnpmnc_232.cnpmnc_232_backend.repository.ItemRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.SupplierRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/api/suppliers")
 public class SupplierController {
-    OrderRepository orderRepo;
-    ItemRepository itemRepo;
-    SupplierRepository supplierRepo;
+    private OrderRepository orderRepo;
+    private SupplierRepository supplierRepo;
 
 
     @PostMapping("/add")
@@ -39,9 +36,32 @@ public class SupplierController {
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllSuppliers() {
-        List<Supplier> rtnList = new ArrayList<>();
-        rtnList = StreamSupport.stream(supplierRepo.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(rtnList, HttpStatus.OK);
+        try {
+            List<Supplier> getSupps = supplierRepo.findAll();
+            List<SupplierRespDto> suppsDto = getSupps.stream()
+                    .map(supp -> {
+                        List<Integer> ordersId = supp.getOrders().stream().map(Order::getId).toList();
+                        return new SupplierRespDto(supp.getId(), supp.getName(), supp.getAddress(), supp.getPhone(),
+                                supp.getEmail(), ordersId);
+                    })
+                    .toList();
+
+            return new ResponseEntity<>(suppsDto, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Fail to get all supplier:" + e.getMessage(), HttpStatus.OK);
+        }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSupplier(@PathVariable Integer id) {
+        try {
+            Supplier supplier = supplierRepo.findById(id).get();
+            List<Integer> ordersId = supplier.getOrders().stream().map(Order::getId).toList();
+            SupplierRespDto rtnSupplier = new SupplierRespDto(supplier.getId(), supplier.getName(), supplier.getAddress(), supplier.getPhone(), supplier.getEmail(), ordersId);
+            return new ResponseEntity<>(rtnSupplier, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Fail to get Supplier:" + e.getMessage(), HttpStatus.OK);
+        }
+    }
+
 }
