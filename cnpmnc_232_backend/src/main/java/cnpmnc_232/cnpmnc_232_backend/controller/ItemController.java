@@ -20,7 +20,8 @@ import java.util.stream.StreamSupport;
 @Getter
 @Setter
 @AllArgsConstructor
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/api/items")
 public class ItemController {
     private ItemRepository itemRepo;

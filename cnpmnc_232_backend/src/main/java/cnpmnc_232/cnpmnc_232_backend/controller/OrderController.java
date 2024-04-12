@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -48,11 +50,14 @@ public class OrderController {
         if (supplier.isPresent()) {
             Order newOrd = new Order(dto.getOrderDate(), supplier.get(), dto.getDeposit());
             orderRepo.save(newOrd);
-            return new ResponseEntity<>("save " + newOrd.getId() + " success", HttpStatus.OK);
+            Map<String, Long> responseData = new HashMap<>();
+            responseData.put("newOrderId", Long.valueOf(newOrd.getId()));
+            return ResponseEntity.ok().body(responseData);
         } else {
             return new ResponseEntity<>("save fail, no supplier found", HttpStatus.OK);
         }
     }
+
 
     @GetMapping("/delete")
     public ResponseEntity<?> deleteOrder(@RequestParam String orderId) {

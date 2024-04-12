@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -21,18 +23,21 @@ import java.util.Optional;
 public class InvoiceController {
     InvoiceRepository invoiceRepo;
     OrderRepository orderRepo;
+
+
     @PostMapping("/add")
-    private ResponseEntity<?> addInvoice(@RequestParam  Integer orderId) {
+    private ResponseEntity<?> addInvoice(@RequestParam Integer orderId) {
         Optional<Order> order = orderRepo.findById(orderId);
         if (order.isPresent()) {
-            Float totalCost = order.get().getTotalCost(); //may be change the way calculating total cost
+            Float totalCost = order.get().getTotalCost();
             Float changeAmount = order.get().getDeposit() > totalCost ? order.get().getDeposit() - totalCost : 0;
-            Invoice newInvoice = new Invoice(order.get(), LocalDate.now(),totalCost, changeAmount);
+            Invoice newInvoice = new Invoice(order.get(), LocalDate.now(), totalCost);
             try {
                 invoiceRepo.save(newInvoice);
-                return new ResponseEntity<>("add invoice for order " + orderId + " success", HttpStatus.CREATED);
-            }
-            catch (Exception e) {
+                Map<String, Integer> responseData = new HashMap<>();
+                responseData.put("orderId", orderId);
+                return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
+            } catch (Exception e) {
                 return new ResponseEntity<>("fail to add bill:" + e.getMessage(), HttpStatus.CONFLICT);
             }
         } else {

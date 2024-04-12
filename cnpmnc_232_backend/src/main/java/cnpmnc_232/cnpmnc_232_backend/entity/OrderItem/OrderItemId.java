@@ -1,6 +1,5 @@
 package cnpmnc_232.cnpmnc_232_backend.entity.OrderItem;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 

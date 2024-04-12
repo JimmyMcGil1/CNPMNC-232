@@ -1,0 +1,1 @@
+export const BASE_URL_SERVER = process.env.REACT_APP_API_SERVER
