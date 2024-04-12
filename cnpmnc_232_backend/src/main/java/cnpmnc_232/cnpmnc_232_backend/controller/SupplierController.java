@@ -52,5 +52,16 @@ public class SupplierController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSupplier(@PathVariable Integer id) {
+        try {
+            Supplier supplier = supplierRepo.findById(id).get();
+            List<Integer> ordersId = supplier.getOrders().stream().map(Order::getId).toList();
+            SupplierRespDto rtnSupplier = new SupplierRespDto(supplier.getId(), supplier.getName(), supplier.getAddress(), supplier.getPhone(), supplier.getEmail(), ordersId);
+            return new ResponseEntity<>(rtnSupplier, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Fail to get Supplier:" + e.getMessage(), HttpStatus.OK);
+        }
+    }
 
 }
