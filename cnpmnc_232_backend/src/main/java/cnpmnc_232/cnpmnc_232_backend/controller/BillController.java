@@ -4,8 +4,10 @@ import cnpmnc_232.cnpmnc_232_backend.dto.request.BillDto;
 import cnpmnc_232.cnpmnc_232_backend.dto.response.StatusRespDto;
 import cnpmnc_232.cnpmnc_232_backend.dto.response.UpdateObjectRespDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Bill;
+import cnpmnc_232.cnpmnc_232_backend.entity.Invoice;
 import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.repository.BillRepository;
+import cnpmnc_232.cnpmnc_232_backend.repository.InvoiceRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class BillController {
     private BillRepository billRepo;
     private OrderRepository orderRepo;
+    private InvoiceRepository invoiceRepo;
 
     @PostMapping("/add")
     private ResponseEntity<?> addBill(@RequestBody BillDto dto) {
@@ -62,7 +65,8 @@ public class BillController {
         Float rtn = 0.0f;
         for (Bill bill : billRepo.findAll()) {
             Order order = bill.getOrder();
-            if (order.getStatusOrder() == false){
+            Optional<Invoice> invoice = invoiceRepo.findByOrderId(order.getId());
+            if (!invoice.isPresent()) {
                 rtn += bill.getTotalCost();
             }
         }

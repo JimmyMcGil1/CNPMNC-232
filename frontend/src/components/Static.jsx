@@ -12,7 +12,7 @@ function Static() {
     const fetchTotalAmount = async () => {
       try {
         
-       const getData = await api.get("/total-invoice-amount");
+       const getData = await api.get("/invoice/total-invoice-amount");
         const data = await getData.data;
         setTotalAmount(data.totalAmount);
         console.log(data.totalAmount);
