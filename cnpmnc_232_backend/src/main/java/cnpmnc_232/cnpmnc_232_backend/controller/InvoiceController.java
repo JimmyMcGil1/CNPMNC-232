@@ -39,4 +39,13 @@ public class InvoiceController {
             return new ResponseEntity<>("fail to add bill: no order " + orderId + " existed", HttpStatus.CONFLICT);
         }
     }
+
+    @GetMapping("/total-invoice-amount")
+    private ResponseEntity<?> getTotalInvoiceAmount() {
+        Float totalInvoiceAmount = 0.0f;
+        for (Invoice invoice : invoiceRepo.findAll()) {
+            totalInvoiceAmount += invoice.getTotalCost();
+        }
+        return new ResponseEntity<>(totalInvoiceAmount, HttpStatus.OK);
+    }
 }

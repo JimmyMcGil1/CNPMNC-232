@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -42,5 +44,29 @@ public class BillController {
             StatusRespDto respDto = new StatusRespDto("fail", "unknown error");
             return new ResponseEntity<>(respDto, HttpStatus.CONFLICT);
         }
+    }
+
+    @GetMapping("/unpaid-bills")
+    private ResponseEntity<?> countUnpaidBills() {
+        List<BillDto> rtnList = new ArrayList<>();
+        for (Bill bill : billRepo.findAll()) {
+            Order order = bill.getOrder();
+            if (order.getStatusOrder() == false){
+                rtnList.add(new BillDto(order.getId(), bill.getDeadLineDate()));
+            }
+        }
+        return new ResponseEntity<>(rtnList, HttpStatus.OK);
+    }
+
+    @GetMapping("/total-unpaid-bills-amount")
+    private ResponseEntity<?> countTotalUnpaidBillsAmount() {
+        Float rtn = 0.0f;
+        for (Bill bill : billRepo.findAll()) {
+            Order order = bill.getOrder();
+            if (order.getStatusOrder() == false){
+                rtn += bill.getTotalCost();
+            }
+        }
+        return new ResponseEntity<>(rtn, HttpStatus.OK);
     }
 }
