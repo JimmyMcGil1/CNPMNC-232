@@ -48,7 +48,7 @@ export default function Header() {
         <div className="py-4 border-b lg:px-8 lg:border-0 border-slate-300/10 mx-4 lg:mx-0">
           <div className="flex justify-between">
             <div className={"flex justify-start gap-4 items-end"}>
-              <Link to="/">Invoice Management</Link>
+              <Link to="/" className="font-bold text-3xl text-blue-500">Invoice Management</Link>
               <Link
                 to="/order"
                 className="text-gray-300 text-2xl font-semibold"

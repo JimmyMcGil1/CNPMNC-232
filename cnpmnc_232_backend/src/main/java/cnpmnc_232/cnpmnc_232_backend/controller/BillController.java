@@ -33,7 +33,6 @@ public class BillController {
             Float totalCost = order.get().getTotalCost(); //may be change the way calculating total cost
             Bill newBill = new Bill(order.get(), LocalDate.now(), dto.getDeadline(), totalCost);
             try {
-                billRepo.save(newBill);
                 UpdateObjectRespDto respDto = new UpdateObjectRespDto("success", newBill.getId(), "");
                 return new ResponseEntity<>(respDto, HttpStatus.CREATED);
             } catch (Exception e) {

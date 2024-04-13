@@ -16,4 +16,5 @@ public class OrderRespDto {
     Float deposit;
     String supplierName;
     Float totalCost;
+    Boolean haveInvoice;
 }

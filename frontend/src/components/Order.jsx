@@ -54,6 +54,7 @@ const Order = () => {
 };
 
 function OrderTable({ items, handleChooseOrder }) {
+  var url = '/invoice-detail/';
   return (
     <div className="container mx-auto ">
       <div className="bg-white shadow-md rounded my-6">
@@ -65,6 +66,7 @@ function OrderTable({ items, handleChooseOrder }) {
               <th className="py-3 px-6 text-left">Deposit</th>
               <th className="py-3 px-6 text-left">Supplier Name</th>
               <th className="py-3 px-6 text-left">Total Cost</th>
+              <th className="py-3 px-6 text-left">Invoice</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-semibold ">
@@ -81,6 +83,7 @@ function OrderTable({ items, handleChooseOrder }) {
                 <td className="py-3 px-6 text-left">{item.deposit}</td>
                 <td className="py-3 px-6 text-left">{item.supplierName}</td>
                 <td className="py-3 px-6 text-left">{item.totalCost}</td>
+                <td className="py-3 px-6 text-left"><a href={url + item.id}>Invoice</a></td>
               </tr>
             ))}
           </tbody>

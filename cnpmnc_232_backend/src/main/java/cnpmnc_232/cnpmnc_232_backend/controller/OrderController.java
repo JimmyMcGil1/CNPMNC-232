@@ -2,8 +2,10 @@ package cnpmnc_232.cnpmnc_232_backend.controller;
 
 import cnpmnc_232.cnpmnc_232_backend.dto.request.OrderDto;
 import cnpmnc_232.cnpmnc_232_backend.dto.response.OrderRespDto;
+import cnpmnc_232.cnpmnc_232_backend.entity.Invoice;
 import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.entity.Supplier;
+import cnpmnc_232.cnpmnc_232_backend.repository.InvoiceRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.SupplierRepository;
 import lombok.AllArgsConstructor;
@@ -28,15 +30,20 @@ import java.util.stream.Collectors;
 public class OrderController {
     OrderRepository orderRepo;
     SupplierRepository suppRepo;
+    InvoiceRepository invoiceRepo;
 
 
     @GetMapping("/all")
     public ResponseEntity<?> allOrders() {
         try {
             List<Order> orders = orderRepo.findAll();
-            List<OrderRespDto> ordersDto = orders.stream().map(order ->
-                    new OrderRespDto(order.getId(), order.getOrderDate(), order.getStatusOrder(),
-                            order.getDeposit(), order.getSupplier().getName(), order.getTotalCost())).collect(Collectors.toList());
+            List<OrderRespDto> ordersDto = orders.stream().map(order -> {
+                Boolean haveInvoice = false;
+                Optional<Invoice> getInvoice = invoiceRepo.findByOrderId(order.getId());
+                if (getInvoice.isPresent()) haveInvoice = true;
+                return new OrderRespDto(order.getId(), order.getOrderDate(), order.getStatusOrder(),
+                        order.getDeposit(), order.getSupplier().getName(), order.getTotalCost(), haveInvoice);
+            }).collect(Collectors.toList());
 
             return new ResponseEntity<>(ordersDto, HttpStatus.OK);
         } catch (Exception e) {
@@ -75,13 +82,20 @@ public class OrderController {
             orderRepo.calToalCost(orderId);
             Optional<Order> getOrder = orderRepo.findById(orderId);
             Order order = getOrder.get();
+            Boolean haveInvoice = isHaveInvoice(order.getId());
             OrderRespDto respDto = new OrderRespDto(order.getId(), order.getOrderDate(), order.getStatusOrder(),
-                    order.getDeposit(), order.getSupplier().getName(), order.getTotalCost());
+                    order.getDeposit(), order.getSupplier().getName(), order.getTotalCost(), haveInvoice);
             return new ResponseEntity<>(respDto, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>("Fail to calculate order total cost:" + e.getMessage(), HttpStatus.CONFLICT);
         }
+    }
+
+    boolean isHaveInvoice(Integer orderId) {
+        Optional<Invoice> getInvoice = invoiceRepo.findByOrderId(orderId);
+        if (getInvoice.isPresent()) return true;
+        return false;
     }
 
 
@@ -90,8 +104,9 @@ public class OrderController {
         Optional<Order> order = orderRepo.findById(id);
         if (order.isPresent()) {
             Order orderData = order.get();
+            Boolean haveInvoice = isHaveInvoice(order.get().getId());
             OrderRespDto data = new OrderRespDto(orderData.getId(), orderData.getOrderDate(), orderData.getStatusOrder(), orderData.getDeposit()
-                    , orderData.getSupplier().getName(), orderData.getTotalCost());
+                    , orderData.getSupplier().getName(), orderData.getTotalCost(), haveInvoice);
             return new ResponseEntity<>(data, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("can not found order: " + id, HttpStatus.NOT_FOUND);
