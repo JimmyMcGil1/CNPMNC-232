@@ -1,16 +1,10 @@
 package cnpmnc_232.cnpmnc_232_backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -43,7 +37,7 @@ public class Order {
         this.orderDate = localDate;
         this.supplier = supplier;
         this.deposit = deposit;
-        this.statusOrder = false;
-        this.totalCost = 0f;
+        this.statusOrder = true;
+        this.totalCost = deposit;
     }
 }

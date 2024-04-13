@@ -1,10 +1,7 @@
-export default function Static()
-{
-    return (
-        <>
-            <p>
-                Static page
-            </p>
-        </>
-    );
+export default function Static() {
+  return (
+    <>
+      <p>Static page</p>
+    </>
+  );
 }

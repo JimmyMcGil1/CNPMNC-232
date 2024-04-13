@@ -28,12 +28,9 @@ public class Invoice {
     @Column(name = "TOTAL_COST")
     Float totalCost;
 
-    @Column(name = "CHANGE_AMOUNT")
-    Float changeAmount;
-    public Invoice(Order order, LocalDate invoiceDate, Float totalCost, Float changeAmount) {
+    public Invoice(Order order, LocalDate invoiceDate, Float totalCost) {
         this.order = order;
         this.invoiceDate = invoiceDate;
         this.totalCost = totalCost;
-        this.changeAmount = changeAmount;
     }
 }

@@ -1,12 +1,12 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Form, Input, InputNumber, Modal, Table } from 'antd';
-import React, { useState } from 'react';
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Form, Input, InputNumber, Modal, Table } from "antd";
+import React, { useState } from "react";
 
 const { Column } = Table;
 
 const OrderForm = () => {
   const [items, setItems] = useState([]);
-  const [item, setItem] = useState('');
+  const [item, setItem] = useState("");
   const [price, setPrice] = useState(0);
   const [amount, setAmount] = useState(0);
   const [form] = Form.useForm();
@@ -36,7 +36,7 @@ const OrderForm = () => {
   const CreateItem = () => {
     setItems([...items, { item, price, amount }]);
     form.resetFields(); // Reset form fields after submission
-    setItem(''); // Reset item state
+    setItem(""); // Reset item state
     setPrice(0); // Reset price state
     setAmount(0); // Reset amount state
   };
@@ -46,7 +46,7 @@ const OrderForm = () => {
     updatedItems[editingIndex] = { item, price, amount };
     setItems(updatedItems);
     form.resetFields(); // Reset form fields after submission
-    setItem(''); // Reset item state
+    setItem(""); // Reset item state
     setPrice(0); // Reset price state
     setAmount(0); // Reset amount state
     setEditingIndex(-1); // Reset editing index
@@ -72,35 +72,59 @@ const OrderForm = () => {
       <Form
         form={form}
         onFinish={onFinish} // Call onFinish when form is submitted
-        className='w-full flex mt-5'
-        name='basic'
+        className="w-full flex mt-5"
+        name="basic"
       >
-        <Form.Item label='Item' name='item' className='ml-2'
-          rules={[{ required: true, message: 'Please input Item!' }]}
+        <Form.Item
+          label="Item"
+          name="item"
+          className="ml-2"
+          rules={[{ required: true, message: "Please input Item!" }]}
         >
           <Input value={item} onChange={(e) => onChangeItem(e.target.value)} />
         </Form.Item>
-        <Form.Item label='Price' name='price' className='ml-2'
-          rules={[{ required: true, message: 'Please input Price!' }]}
+        <Form.Item
+          label="Price"
+          name="price"
+          className="ml-2"
+          rules={[{ required: true, message: "Please input Price!" }]}
         >
-          <InputNumber min={0} defaultValue={0} value={price} onChange={onChangePrice} />
+          <InputNumber
+            min={0}
+            defaultValue={0}
+            value={price}
+            onChange={onChangePrice}
+          />
         </Form.Item>
-        <Form.Item label='Amount' name='amount' className='ml-2'
-          rules={[{ required: true, message: 'Please input Amount!' }]}
+        <Form.Item
+          label="Amount"
+          name="amount"
+          className="ml-2"
+          rules={[{ required: true, message: "Please input Amount!" }]}
         >
-          <InputNumber min={0} defaultValue={0} value={amount} onChange={onChangeAmount} />
+          <InputNumber
+            min={0}
+            defaultValue={0}
+            value={amount}
+            onChange={onChangeAmount}
+          />
         </Form.Item>
-        <Form.Item className='ml-2'>
-          <Button type='primary' htmlType='submit'>
+        <Form.Item className="ml-2">
+          <Button type="primary" htmlType="submit">
             Add Item
           </Button>
         </Form.Item>
       </Form>
       <Table dataSource={items}>
-        <Column title="ITEM ID" dataIndex='idItem' key='idItem' render={(text, record, index) => index + 1}/>
-        <Column title="Item" dataIndex='item' key='item'/>
-        <Column title="Price" dataIndex='price' key='price'/>
-        <Column title="Amount" dataIndex='amount' key='amount'/>
+        <Column
+          title="ITEM ID"
+          dataIndex="idItem"
+          key="idItem"
+          render={(text, record, index) => index + 1}
+        />
+        <Column title="Item" dataIndex="item" key="item" />
+        <Column title="Price" dataIndex="price" key="price" />
+        <Column title="Amount" dataIndex="amount" key="amount" />
         <Column
           title="Edit"
           key="edit"
@@ -112,7 +136,10 @@ const OrderForm = () => {
           title="Delete"
           key="delete"
           render={(_, record, index) => (
-            <Button icon={<DeleteOutlined />} onClick={() => handleDelete(index)} />
+            <Button
+              icon={<DeleteOutlined />}
+              onClick={() => handleDelete(index)}
+            />
           )}
         />
       </Table>
@@ -132,17 +159,29 @@ const OrderForm = () => {
         <Form
           form={form}
           onFinish={onFinish}
-          className='w-full flex mt-5'
-          name='basic'
+          className="w-full flex mt-5"
+          name="basic"
         >
-          <Form.Item label='Item' name='item'>
-            <Input value={item} defaultValue={item} onChange={(e) => onChangeItem(e.target.value)} />
+          <Form.Item label="Item" name="item">
+            <Input
+              value={item}
+              defaultValue={item}
+              onChange={(e) => onChangeItem(e.target.value)}
+            />
           </Form.Item>
-          <Form.Item label='Price' name='price'>
-            <InputNumber min={0} defaultValue={price} onChange={onChangePrice} />
+          <Form.Item label="Price" name="price">
+            <InputNumber
+              min={0}
+              defaultValue={price}
+              onChange={onChangePrice}
+            />
           </Form.Item>
-          <Form.Item label='Amount' name='amount'>
-            <InputNumber min={0} defaultValue={amount} onChange={onChangeAmount} />
+          <Form.Item label="Amount" name="amount">
+            <InputNumber
+              min={0}
+              defaultValue={amount}
+              onChange={onChangeAmount}
+            />
           </Form.Item>
         </Form>
       </Modal>
