@@ -83,7 +83,11 @@ function OrderTable({ items, handleChooseOrder }) {
                 <td className="py-3 px-6 text-left">{item.deposit}</td>
                 <td className="py-3 px-6 text-left">{item.supplierName}</td>
                 <td className="py-3 px-6 text-left">{item.totalCost}</td>
-                <td className="py-3 px-6 text-left"><a href={url + item.id}>Invoice</a></td>
+                {item.haveInvoice ? (
+                  <td className="py-3 px-6 text-left"><a href={url + item.id}>Invoice</a></td>
+                ) : (
+                  <td className="py-3 px-6 text-left"></td>
+                )} 
               </tr>
             ))}
           </tbody>

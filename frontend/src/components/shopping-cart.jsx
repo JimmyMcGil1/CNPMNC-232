@@ -42,6 +42,17 @@ function ShoppingCart() {
 
   const randomNumber = generateRandomNumber();
 
+  const getTotal = () => {
+    var total = 0;
+    console.log(dataArray)
+    for( var i = 0; i < dataArray.length; i ++) {
+      total += 10 * count;
+    }
+    return total;
+  }
+  const total = getTotal();
+
+
   const handleSubmitOrder = async () => {
     const dataSubmit = {
       orderDate: dateOrder,
@@ -59,7 +70,7 @@ function ShoppingCart() {
           itemId: dataArray[0].id,
           orderId: newOrderId,
           salePrice: 10,
-          amount: 1000,
+          amount: count,
         };
         await orderService.addItemToOrderDetail(dataItemOrder);
         router("/invoice-detail/" + newOrderId);
@@ -149,7 +160,7 @@ function ShoppingCart() {
                         </Box>
                       </div>
                       <div className="td_item item_price">
-                        <label>$ 260.00</label>
+                        <label>{item.totalCost}</label>
                       </div>
                       <div className="td_item item_remove">
                         <Tooltip title="remove item">
@@ -183,7 +194,7 @@ function ShoppingCart() {
               </div>
               <div>
                 <label>Subtotal: </label>
-                <strong>$2451.00</strong>
+                <strong>{total}</strong>
               </div>
               <div>
                 <label>Items: </label>
