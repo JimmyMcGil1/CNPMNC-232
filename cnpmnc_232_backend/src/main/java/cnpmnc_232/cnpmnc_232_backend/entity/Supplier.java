@@ -36,4 +36,8 @@ public class Supplier {
         this.phone = phone;
         this.email = email;
     }
+    public List<Integer> getOrders() {
+        List<Integer> orders = this.orders.stream().map(Order::getId).toList();
+        return orders;
+    }
 }

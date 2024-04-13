@@ -38,15 +38,15 @@ public class SupplierController {
     public ResponseEntity<?> getAllSuppliers() {
         try {
             List<Supplier> getSupps = supplierRepo.findAll();
-            List<SupplierRespDto> suppsDto = getSupps.stream()
-                    .map(supp -> {
-                        List<Integer> ordersId = supp.getOrders().stream().map(Order::getId).toList();
-                        return new SupplierRespDto(supp.getId(), supp.getName(), supp.getAddress(), supp.getPhone(),
-                                supp.getEmail(), ordersId);
-                    })
-                    .toList();
+//            List<SupplierRespDto> suppsDto = getSupps.stream()
+//                    .map(supp -> {
+//                        List<Integer> ordersId = supp.getOrders().stream().map(Order::getId).toList();
+//                        return new SupplierRespDto(supp.getId(), supp.getName(), supp.getAddress(), supp.getPhone(),
+//                                supp.getEmail(), ordersId);
+//                    })
+//                    .toList();
 
-            return new ResponseEntity<>(suppsDto, HttpStatus.OK);
+            return new ResponseEntity<>(getSupps, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Fail to get all supplier:" + e.getMessage(), HttpStatus.OK);
         }
@@ -56,9 +56,9 @@ public class SupplierController {
     public ResponseEntity<?> getSupplier(@PathVariable Integer id) {
         try {
             Supplier supplier = supplierRepo.findById(id).get();
-            List<Integer> ordersId = supplier.getOrders().stream().map(Order::getId).toList();
-            SupplierRespDto rtnSupplier = new SupplierRespDto(supplier.getId(), supplier.getName(), supplier.getAddress(), supplier.getPhone(), supplier.getEmail(), ordersId);
-            return new ResponseEntity<>(rtnSupplier, HttpStatus.OK);
+//            List<Integer> ordersId = supplier.getOrders().stream().map(Order::getId).toList();
+//            SupplierRespDto rtnSupplier = new SupplierRespDto(supplier.getId(), supplier.getName(), supplier.getAddress(), supplier.getPhone(), supplier.getEmail(), ordersId);
+            return new ResponseEntity<>(supplier, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Fail to get Supplier:" + e.getMessage(), HttpStatus.OK);
         }

@@ -1,11 +1,13 @@
 package cnpmnc_232.cnpmnc_232_backend.controller;
 
+import cnpmnc_232.cnpmnc_232_backend.dto.response.StatusRespDto;
 import cnpmnc_232.cnpmnc_232_backend.entity.Bill;
 import cnpmnc_232.cnpmnc_232_backend.entity.Invoice;
 import cnpmnc_232.cnpmnc_232_backend.entity.Order;
 import cnpmnc_232.cnpmnc_232_backend.repository.InvoiceRepository;
 import cnpmnc_232.cnpmnc_232_backend.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.NotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,5 +54,16 @@ public class InvoiceController {
             totalInvoiceAmount += invoice.getTotalCost();
         }
         return new ResponseEntity<>(totalInvoiceAmount, HttpStatus.OK);
+    }
+    @GetMapping("/{orderId}")
+    private ResponseEntity<?> getInvoice(@PathVariable Integer orderId) {
+        Optional<Invoice> getInvoice = invoiceRepo.findByOrderId(orderId);
+        if (getInvoice.isPresent()){
+            return new ResponseEntity<>(getInvoice.get(), HttpStatus.OK);
+        }
+        else {
+            StatusRespDto dto = new StatusRespDto("fail", "Can not find invoice by id");
+            return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+        }
     }
 }
